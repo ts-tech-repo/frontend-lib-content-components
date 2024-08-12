@@ -234,14 +234,14 @@ class ReactStateOLXParser {
     const widgetObject = this.addMultiSelectAnswers(option);
     const demandhint = this.addHints();
     const solution = this.addSolution();
-
+  
     const problemBodyArr = [{
       [problemType]: [
         { [widget]: widgetObject },
         ...solution,
       ],
     }];
-
+  
     const questionString = this.richTextBuilder.build(question);
     const hintString = this.richTextBuilder.build(demandhint);
     const problemBody = this.richTextBuilder.build(problemBodyArr);
@@ -260,13 +260,20 @@ class ReactStateOLXParser {
       default:
         break;
     }
+  
+    // Add shuffle attribute if problemType is SINGLESELECT
+    if (problemType === ProblemTypeKeys.SINGLESELECT) {
+      problemTypeTag = problemTypeTag.replace(/<choicegroup/, '<choicegroup shuffle="true"');
+    }
+  
     const questionStringWithEmDescriptionReplace = this.replaceEmWithDescriptionTag(questionString);
     const updatedString = `${problemTypeTag}\n${questionStringWithEmDescriptionReplace}`;
     const problemBodyString = problemBody.replace(problemTypeTag, updatedString);
     const fullProblemString = `<problem>${problemBodyString}${hintString}\n</problem>`;
-
+  
     return fullProblemString;
   }
+  
 
   replaceEmWithDescriptionTag(xmlString) {
     const regexPattern = /<em class="olx_description">(.*?)<\/em>/g;

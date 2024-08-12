@@ -78,6 +78,9 @@ export const SettingsWidget = ({
           </div>
           )}
       <div className="my-3">
+        <button>Shuffle options</button>
+      </div>
+      <div className="my-3">
         <ScoringCard
           scoring={settings.scoring}
           defaultValue={defaultSettings.maxAttempts}
