@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, FormattedMessage } from '@edx/frontend-platform/i18n';
 import { connect } from 'react-redux';
@@ -37,6 +37,13 @@ export const SettingsWidget = ({
   updateAnswer,
   defaultSettings,
 }) => {
+  const [shuffle, setShuffle] = useState(settings.shuffle || false);
+
+  const handleShuffleToggle = () => {
+    setShuffle(!shuffle);
+    updateSettings({ shuffle: !shuffle });
+  };
+
   const { isAdvancedCardsVisible, showAdvancedCards } = showAdvancedSettingsCards();
 
   const feedbackCard = () => {
@@ -56,6 +63,9 @@ export const SettingsWidget = ({
 
   return (
     <div className="settingsWidget ml-4">
+      <Button onClick={handleShuffleToggle}>
+        {shuffle ? 'Disable Shuffle' : 'Enable Shuffle'}
+      </Button>
       <div className="mb-3">
         <TypeCard
           answers={answers}

@@ -262,7 +262,7 @@ class ReactStateOLXParser {
     }
   
     // Add shuffle attribute if problemType is SINGLESELECT
-    if (problemType === ProblemTypeKeys.SINGLESELECT) {
+    if (problemType === ProblemTypeKeys.SINGLESELECT || problemType === ProblemTypeKeys.MULTISELECT) {
       problemTypeTag = problemTypeTag.replace(/<choicegroup/, '<choicegroup shuffle="true"');
     }
   
