@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edx/frontend-lib-content-components.git"
+    "url": "git+https://github.com/ts-tech-repo/frontend-lib-content-components.git#staging"
   },
   "author": "edX",
   "license": "AGPL-3.0",
